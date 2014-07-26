@@ -1,16 +1,7 @@
 {
-  "variables": {
-    "aws_access_key": "",
-    "aws_secret_key": "",
-    "rs_user": "",
-    "rs_pass": "",
-    "rs_api_key": ""
-  },
   "builders": [
   {
     "type": "amazon-ebs",
-    "access_key": "{{user `aws_access_key`}}",
-    "secret_key": "{{user `aws_secret_key`}}",
     "region": "eu-west-1",
     "source_ami": "ami-896c96fe",
     "instance_type": "t1.micro",
@@ -19,8 +10,7 @@
   },
   {
     "type": "openstack",
-    "username": "{{user `rs_user`}}",
-    "password": "{{user `rs_pass`}}",
+    "openstack_provider": "rackspace",
     "provider": "rackspace-uk",
     "region": "LON",
     "ssh_username": "root",
