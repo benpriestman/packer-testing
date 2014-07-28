@@ -1,0 +1,48 @@
+{
+  "builders": [
+  {
+    "type": "amazon-ebs",
+    "region": "eu-west-1",
+    "source_ami": "ami-896c96fe",
+    "instance_type": "t1.micro",
+    "ssh_username": "ubuntu",
+    "ami_name": "packer-example {{timestamp}}"
+  },
+  {
+    "type": "openstack",
+    "openstack_provider": "rackspace",
+    "provider": "rackspace-uk",
+    "region": "LON",
+    "ssh_username": "root",
+    "image_name": "Test image",
+    "source_image": "23b564c9-c3e6-49f9-bc68-86c7a9ab5018",
+    "flavor": "2"
+  },
+  {
+    "type": "virtualbox-iso",
+    "headless": false,
+    "guest_os_type": "RedHat_64",
+    "disk_size": 8192,
+    "iso_url": "http://mirror.ox.ac.uk/sites/mirror.centos.org/6.5/isos/x86_64/CentOS-6.5-x86_64-minimal.iso",
+    "iso_checksum": "0d9dc37b5dd4befa1c440d2174e88a87",
+    "iso_checksum_type": "md5",
+    "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/base.cfg<enter><wait>"
+      ],
+    "ssh_username": "root",
+    "ssh_password": "password",
+    "ssh_wait_timeout": "10000s",
+    "shutdown_command": "sudo shutdown -P now",
+    "http_directory": "centos_65
+    "
+  }
+],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "sudo apt-get update",
+      "sudo apt-get install -y redis-server"
+    ]
+  }]
+}
