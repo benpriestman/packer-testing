@@ -1,6 +1,7 @@
 {
   "variables": {
     "osfamily": "debian",
+    "script_file_ext": "sh",
     "image_base_name": "debian_7_base",
     "aws_base_source": "ami-1d61a76a",
     "aws_region": "eu-west-1",
@@ -8,8 +9,8 @@
     "rackspace_region": "LON",
     "rackspace_provider": "rackspace-uk",
     "vbox_guest_os_type": "Debian_64",
-    "vbox_iso_url": "http://cdimage.debian.org/debian-cd/7.6.0/amd64/iso-cd/debian-7.6.0-amd64-CD-1.iso",
-    "vbox_iso_checksum": "7b9b0ffa5248f8c547b36d5575e63025",
+    "vbox_iso_url": "http://cdimage.debian.org/debian-cd/7.6.0/amd64/iso-cd/debian-7.6.0-amd64-netinst.iso",
+    "vbox_iso_checksum": "8a3c2ad7fd7a9c4c7e9bcb5cae38c135",
     "vbox_iso_checksum_type": "md5",
     "vbox_ssh_username": "root",
     "vbox_ssh_password": "password"
@@ -45,21 +46,21 @@
       "ssh_password": "{{ user `vbox_ssh_password` }}",
       "ssh_wait_timeout": "10000s",
       "headless": "false",
-      "shutdown_command": "sudo shutdown -P now",
+      "shutdown_command": "sudo shutdown -hP now",
       "http_directory": "http",
-      "guest_additions_mode": "attach"
+      "guest_additions_mode": "upload"
     }
   ],
   "provisioners": [
     {
       "type": "shell",
       "scripts": [
-          "scripts/base_linux.sh"
+          "scripts/base_{{ user `osfamily` }}.{{ user `script_file_ext` }}"
       ],
       "override": {
         "virtualbox-iso": {
           "scripts": [
-            "scripts/vbox_linux.sh"
+            "scripts/vbox_{{ user `osfamily` }}.{{ user `script_file_ext` }}"
           ]
         }
       }
