@@ -4,9 +4,7 @@
 sudo apt-get -yq install linux-headers-$(uname -r) build-essential dkms
 
 # Install guest additions
-VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
-cd /tmp
-mount -o loop ~/VBoxGuestAdditions_$VBOX_VERSION.iso /media
-sh /media/VBoxLinuxAdditions.run -d
-umount /media
+mount -o loop ~/VBoxGuestAdditions.iso /mnt
+sh /mnt/VBoxLinuxAdditions.run install --force
+umount /mnt
 rm -rf ~/VBoxGuestAdditions_*.iso
