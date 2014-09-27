@@ -20,8 +20,12 @@ REM Rackspace settings
 set SDK_USERNAME=*********************************
 set SDK_API_KEY=*********************************
 
+To get details of available Rackspace images, use: rumm (http://rackspace.github.io/rumm/). For details of AWS images, use the aws cli, or web portal.
+
+To build:
+
 >creds.bat
->packer templates\debian_7_base.json
+>packer build templates\debian_7_base.json
 or
 >packer build templates\centos_6_base.json
 
@@ -31,22 +35,7 @@ Make sure to remove created images to avoid bills!
 
 
 ToDO:
-Work out what the available Rackspace images are. Need a way of talking to the API for that.
- Downloaded http://developer.rackspace.com/blog/powerclient-rackspace-cloud-api-powershell-client.html to help get image ids, but doesn't support non-us locations
- Can use the openstack nova-client (http://www.rackspace.com/knowledge_center/article/using-python-novaclient-with-the-rackspace-cloud). Gets us into python territory, though. and doesn't help with AWS. Authenticates with username/password combo.
- Trying rumm (http://rackspace.github.io/rumm/). Runs in ruby. Is targetted squarely at rackspace cloud and seems to be targetted towards rails apps. Nice and easy, though.
-  Install ruby (http://rubyinstaller.org/downloads/)
-  Install devkit (http://rubyinstaller.org/downloads/)
-  cd to devkit location
-   ruby dk.rb init
-   ruby dk.rb install
-  gem install rumm
- Trying fog (http://fog.io/), which underlies rumm.
-  Install ruby (http://rubyinstaller.org/downloads/)
-  gem install fog
-   (takes ages to install rdocs!
- 
-Sort out vbox guest additions. This looks handy https://github.com/osuosl/packer-templates/blob/master/scripts/vbox-additions.sh
+Amalgamate centos and debian builds.
 Look at authentication to vbox builds
 serialise vbox builds?
 Configure basice puppet prerequisites with a shell script.
