@@ -21,7 +21,11 @@ set SDK_USERNAME=*********************************
 set SDK_API_KEY=*********************************
 
 >creds.bat
->packer build example.json
+>packer templates\debian_7_base.json
+or
+>packer build templates\centos_6_base.json
+
+The boot command passed to iso-based builds differs for different systems and relies on variables that don't exist in advance of the builders running, so cannot be easily paramterised away. Hence the OS-specific files.
 
 Make sure to remove created images to avoid bills!
 
@@ -43,7 +47,6 @@ Work out what the available Rackspace images are. Need a way of talking to the A
    (takes ages to install rdocs!
  
 Sort out vbox guest additions. This looks handy https://github.com/osuosl/packer-templates/blob/master/scripts/vbox-additions.sh
-Parameterise/switch to multiple templates to cater for different OSes? Maybe not. Exploring use of 'only' and overrides.
 Look at authentication to vbox builds
 serialise vbox builds?
 Configure basice puppet prerequisites with a shell script.
